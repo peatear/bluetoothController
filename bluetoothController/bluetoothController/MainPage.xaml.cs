@@ -12,13 +12,13 @@ using Windows.Networking.Sockets;
 using Windows.Networking.Proximity;
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
+using System.Collections.ObjectModel;
 
 namespace bluetoothController
 {
     public partial class MainPage : PhoneApplicationPage
     {
         // Constructor
-
         private StreamSocket s = null;
         DataWriter output;
         String outString = "";
@@ -27,10 +27,11 @@ namespace bluetoothController
 
         public MainPage()
         {
+
             InitializeComponent();
             //controllerManager = new btConManager();
             //controllerManager.Initialize();
-            init(SetupBluetoothLink());
+           // init(SetupBluetoothLink());
 
         }
         private async void init(Task<bool> setupOK)
@@ -91,21 +92,22 @@ namespace bluetoothController
                 throttleText.Text = "Throttle: "+e.NewValue.ToString("0.0");
             });
             
-              //  sendThrottle(e.NewValue);
+                //sendThrottle(e.NewValue);
             //if (controllerManager != null)
                 //await controllerManager.SendCommandDouble(e.NewValue);
-            //if (connected)
-                //writeData("hello");
+            if (connected)
+                writeData("hello");
         }
 
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {
-            //init(SetupBluetoothLink());
+            init(SetupBluetoothLink());
             //connected = true;
             //AppToApp();
-            if (connected)
-                writeData("hello");
+           // if (connected)
+                //writeData("hello");
         }
+
 
         private async void AppToApp()
         {
@@ -141,7 +143,5 @@ namespace bluetoothController
                 }
             }
         }
-
-
     }
 }
